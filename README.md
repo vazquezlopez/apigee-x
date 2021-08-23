@@ -1,5 +1,5 @@
 # CICD Pipeline
-
+# The purpose
 This project contains an reference implementation for a CI/CD pipeline for
 Apigee using the [Apigee Deploy Maven
 Plugin](https://github.com/apigee/apigee-deploy-maven-plugin).
