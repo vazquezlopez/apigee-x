@@ -3,8 +3,7 @@ pipeline {
     agent any
 
     environment {
-        println "----------  Build Config ----------"
-        APIGEE_CREDS = credentials('apigee')
+        // APIGEE_CREDS = credentials('apigee')
 
         // Mutliple options for setting the Apigee deployment target config:
         // 1. As a jenkins global property at ${JENKINS_URL}/configure if you don't have access to edit this file
