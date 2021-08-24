@@ -19,6 +19,7 @@ pipeline {
     stages {
         stage('Set Apigee Env and Proxy Suffix') {
           steps {
+            echo "hello"	
             script{
               // Main branch for Apigee test environment
               if (env.GIT_BRANCH == "main") {
