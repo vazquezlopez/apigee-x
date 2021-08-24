@@ -3,6 +3,7 @@ pipeline {
     agent any
 
     environment {
+        echo "hello api creds"
         APIGEE_CREDS = credentials('apigee')
 
         // Mutliple options for setting the Apigee deployment target config:
