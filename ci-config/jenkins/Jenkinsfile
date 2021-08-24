@@ -10,10 +10,10 @@ pipeline {
         // 2. As a branch specific environment variable in the first pipeline stage
         // 3. As a environment variable for all branches (see below)
 
-        // API_VERSION = 'google'
-        // APIGEE_ORG = 'my-org'
-        // APIGEE_TEST_ENV = 'test1'
-        // TEST_HOST= 'api.example.com'
+        API_VERSION = 'google'
+        APIGEE_ORG = 'eval'
+        APIGEE_TEST_ENV = 'test'
+        TEST_HOST= 'toc-avaya-sandbox-apigee-eval.apigee.net'
     }
 
     stages {
