@@ -14,6 +14,7 @@ pipeline {
         APIGEE_ORG = 'eval'
         APIGEE_TEST_ENV = 'test'
         TEST_HOST= 'toc-avaya-sandbox-apigee-eval.apigee.net'
+        APIGEE_DEPLOYMENT_SUFFIX='jenkis'
     }
 
     stages {
