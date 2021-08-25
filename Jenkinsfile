@@ -135,7 +135,7 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh "TOKEN_AUTH="\$(gcloud auth print-access-token)"
+            sh 'TOKEN_AUTH=$(gcloud auth print-access-token)'
             sh """mvn clean install \
                 -Pgoogleapi \
                 -Denv="eval" \
