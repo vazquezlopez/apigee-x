@@ -135,15 +135,14 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh """
-              mvn clean install \
+            sh "mvn clean install \
                 -Pgoogleapi \
                 -Denv="eval" \
                 -Dtoken="$(gcloud auth print-access-token)" \
                 -Dorg="${env.APIGEE_ORG}" \
                 -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" \
                 -Ddeployment.description="Jenkins Build: ${env.BUILD_TAG} Author: ${env.AUTHOR_EMAIL}"
-            """
+            "
           }
         }
 
