@@ -11,7 +11,7 @@ pipeline {
         // 3. As a environment variable for all branches (see below)
 
         API_VERSION = 'google'
-        APIGEE_ORG = 'eval'
+        APIGEE_ORG = 'toc-avaya-sandbox-apigee-eval'
         APIGEE_TEST_ENV = 'test'
         TEST_HOST= 'toc-avaya-sandbox-apigee-eval.apigee.net'
         APIGEE_DEPLOYMENT_SUFFIX='jenkis'
