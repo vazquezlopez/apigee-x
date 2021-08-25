@@ -139,7 +139,7 @@ pipeline {
               APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
               mvn clean install \
                 -Pgoogleapi \
-                -Denv="${env.APIGEE_ENV}" \
+                -Denv="eval" \
                 -Dtoken="$(gcloud auth print-access-token)" \
                 -Dorg="${env.APIGEE_ORG}" \
                 -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" \
