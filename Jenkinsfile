@@ -13,8 +13,10 @@ pipeline {
         API_VERSION = 'google'
         APIGEE_ORG = 'toc-avaya-sandbox-apigee-eval'
         APIGEE_TEST_ENV = 'test'
-        TEST_HOST= 'toc-avaya-sandbox-apigee-eval.apigee.net'
+        TEST_HOST= 'toc-avaya-apigee.dclatam.net'
         APIGEE_DEPLOYMENT_SUFFIX='jenkis'
+        APIGEE_TOKEN = 'ya29.a0ARrdaM9izC_bVyDl8flC3nVQB06YvG2EK9CDr-QSJ8IldN3MOAuGOqGtL7kNctrftTCITuOdaXe11-sZn9kmC_NEYKRrjrD1Y2UEfrXwm7IJspQQ2XzQbI62R3DiDapEBzCjoSX4CTgOVAmDOqirjQOj0NjI1CaPxAdPrA'
+        AUTHOR_EMAIL = '@google.com'
     }
 
     stages {
@@ -135,7 +137,7 @@ pipeline {
           }
           steps {
             sh """
-              APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
+              APIGEE_SA_TOKEN="${env.APIGEE_TOKEN}"
               mvn clean install \
                 -Pgoogleapi \
                 -Denv="${env.APIGEE_ENV}" \
