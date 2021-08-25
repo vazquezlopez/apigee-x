@@ -12,7 +12,7 @@ pipeline {
 
         API_VERSION = 'google'
         APIGEE_ORG = 'toc-avaya-sandbox-apigee'
-        APIGEE_TEST_ENV = 'test'
+        APIGEE_ENV = 'eval'
         TEST_HOST= 'toc-avaya-apigee.dclatam.net'
         APIGEE_DEPLOYMENT_SUFFIX='jenkis'
         AUTHOR_EMAIL = '@google.com'
