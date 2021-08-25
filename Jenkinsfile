@@ -11,11 +11,11 @@ pipeline {
         // 3. As a environment variable for all branches (see below)
 
         API_VERSION = 'google'
-        APIGEE_ORG = 'toc-avaya-sandbox-apigee-eval'
+        APIGEE_ORG = 'toc-avaya-sandbox-apigee'
         APIGEE_TEST_ENV = 'test'
         TEST_HOST= 'toc-avaya-apigee.dclatam.net'
         APIGEE_DEPLOYMENT_SUFFIX='jenkis'
-        APIGEE_TOKEN = 'ya29.a0ARrdaM9izC_bVyDl8flC3nVQB06YvG2EK9CDr-QSJ8IldN3MOAuGOqGtL7kNctrftTCITuOdaXe11-sZn9kmC_NEYKRrjrD1Y2UEfrXwm7IJspQQ2XzQbI62R3DiDapEBzCjoSX4CTgOVAmDOqirjQOj0NjI1CaPxAdPrA'
+        APIGEE_TOKEN = 'ya29.a0ARrdaM_yA_6IyGtpZQA_lAcYuwT-4eVkBO8p9eP830tQi6XvVM75jSWkPOez9kmcHZDaGYwWsFfbqk2RJrWpRM_qp76qESTKiCej0WWDs6Gigb6n-Gu69H_5iDRmgoR4ny9UcD9EUAsG3jtngxq0h6PgYoMyso0InEAA9w'
         AUTHOR_EMAIL = '@google.com'
     }
 
