@@ -144,7 +144,7 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh 'mvn clean install -Pgoogleapi -Denv=eval -Dtoken=${TOKEN_AUTH} -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}'
+            sh "mvn clean install -Pgoogleapi -Denv=eval -Dtoken=${TOKEN_AUTH} -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}"
           }
         }
        
