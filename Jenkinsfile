@@ -16,6 +16,7 @@ pipeline {
         TEST_HOST= 'toc-avaya-apigee.dclatam.net'
         APIGEE_DEPLOYMENT_SUFFIX='jenkis'
         AUTHOR_EMAIL = '@google.com'
+        TOKEN_AUTH=$(gcloud auth print-access-token)'
     }
 
     stages {
@@ -121,7 +122,7 @@ pipeline {
                 -Papigeeapi \
                 -Dpassword="${APIGEE_CREDS_PSW}" \
                 -Denv="${env.APIGEE_ENV}" \
-                -Dusername="${APIGEE_CREDS_USR}" \
+                -Dusername="${APIGchshchshEE_CREDS_USR}" \
                 -Dorg="${env.APIGEE_ORG}" \
                 -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" \
                 -Ddeployment.description="Jenkins Build: ${env.BUILD_TAG} Author: ${env.AUTHOR_EMAIL}"
@@ -135,10 +136,10 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh 'mvn clean install -Pgoogleapi -Denv=eval -Dtoken=$(gcloud auth print-access-token) -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}'
+              sh 'mvn clean install -Pgoogleapi -Denv=eval -Dtoken=${env.TOKEN_AUTH} -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}'
           }
         }
-
+       
         stage('Functional Test') {
           steps {
             sh "TEST_HOST=${env.TEST_HOST} node ./node_modules/.bin/cucumber-js ./target/test/integration --format json:./target/reports.json"
