@@ -139,9 +139,9 @@ pipeline {
             sh 'mvn clean install \
                 -Pgoogleapi \
                 -Denv="eval" \
-                -Dtoken="\${TOKEN_AUTH}" \
-                -Dorg="\${env.APIGEE_ORG}" \
-                -Ddeployment.suffix="\${env.APIGEE_DEPLOYMENT_SUFFIX}" \
+                -Dtoken=${TOKEN_AUTH} \
+                -Dorg=${env.APIGEE_ORG} \
+                -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX} \
                 -Ddeployment.description="Jenkins Build"'
           }
         }
