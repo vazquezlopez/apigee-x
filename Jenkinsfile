@@ -136,7 +136,17 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh 'TOKEN_AUTH=$(gcloud auth print-access-token) mvn clean install -Pgoogleapi -Denv=eval -Dtoken="\$TOKEN_AUTH" -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}'
+            sh """
+              APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
+              TOKEN_AUTH=$(gcloud auth print-access-token)
+              mvn clean install \
+                -Pgoogleapi \
+                -Denv="${env.APIGEE_ENV}" \
+                -Dtoken="\$TOKEN_AUTH" \
+                -Dorg="${env.APIGEE_ORG}" \
+                -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" \
+                -Ddeployment.description="Jenkins Build: 1 Author: ${env.AUTHOR_EMAIL}"
+            """
           }
         }
        
