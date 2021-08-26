@@ -136,13 +136,7 @@ pipeline {
           }
           steps {
             sh 'TOKEN_AUTH=$(gcloud auth print-access-token)'
-            sh 'mvn clean install \
-                -Pgoogleapi \
-                -Denv="eval" \
-                -Dtoken=${TOKEN_AUTH} \
-                -Dorg=${env.APIGEE_ORG} \
-                -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX} \
-                -Ddeployment.description="Jenkins Build"'
+            sh "mvn clean install -Pgoogleapi -Denv="eval" -Dtoken=${TOKEN_AUTH} -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}"
           }
         }
 
