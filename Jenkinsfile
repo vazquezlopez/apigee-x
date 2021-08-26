@@ -16,6 +16,7 @@ pipeline {
         TEST_HOST= 'toc-avaya-apigee.dclatam.net'
         APIGEE_DEPLOYMENT_SUFFIX='jenkis'
         AUTHOR_EMAIL = '@google.com'
+        sh 'TOKEN_AUTH=$(gcloud auth print-access-token)'
     }
 
     stages {
@@ -130,21 +131,13 @@ pipeline {
           }
         }
 
-        stage('Set oauth') {
-          when {
-            expression { env.API_VERSION ==  'google'}
-          }
-          steps {
-            sh 'TOKEN_AUTH=$(gcloud auth print-access-token)'
-          }
-        }
         
         stage('Deploy X/hybrid') {
           when {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh "mvn clean install -Pgoogleapi -Denv=eval -Dtoken=${TOKEN_AUTH} -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}"
+            sh "mvn clean install -Pgoogleapi -Denv=eval -Dtoken=${env.TOKEN_AUTH} -Dorg=${env.APIGEE_ORG} -Ddeployment.suffix=${env.APIGEE_DEPLOYMENT_SUFFIX}"
           }
         }
        
