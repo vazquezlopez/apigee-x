@@ -142,7 +142,7 @@ pipeline {
                 -Dtoken="\${TOKEN_AUTH}" \
                 -Dorg="\${env.APIGEE_ORG}" \
                 -Ddeployment.suffix="\${env.APIGEE_DEPLOYMENT_SUFFIX}" \
-                -Ddeployment.description="Jenkins Build: ${env.BUILD_TAG} Author: ${env.AUTHOR_EMAIL}"'
+                -Ddeployment.description="Jenkins Build"'
           }
         }
 
