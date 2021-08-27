@@ -141,7 +141,7 @@ pipeline {
               TOKEN_AUTH=$(gcloud auth print-access-token)
               mvn clean install \
                 -Pgoogleapi \
-                -Denv="${env.APIGEE_ENV}" 
+                -Denv=${env.APIGEE_ENV} 
             '''
           }
         }
