@@ -3,7 +3,6 @@ pipeline {
     agent any
 
     environment {
-         APIGEE_CREDS = credentials('jenkis-gcp')
         GOOGLE_APPLICATION_CREDENTIALS= credentials('jenkis-gcp')
         // Mutliple options for setting the Apigee deployment target config:
         // 1. As a jenkins global property at ${JENKINS_URL}/configure if you don't have access to edit this file
@@ -141,7 +140,7 @@ pipeline {
               APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
               mvn clean install \
                 -Pgoogleapi \
-                -Denv="eval" -Dorg="${env.APIGEE_ORG}" -Dtoken=${APIGEE_SA_TOKEN} -Ddeployment.suffix="pipeline" 
+                -Denv="eval" -Dorg="\${env.APIGEE_ORG}" -Dtoken=${APIGEE_SA_TOKEN} -Ddeployment.suffix="pipeline" 
             '''
           }
         }
