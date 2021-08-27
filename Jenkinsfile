@@ -138,8 +138,6 @@ pipeline {
           steps {
             sh '''
               #!/bin/bash
-              APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
-              TOKEN_AUTH=$(gcloud auth print-access-token)
               mvn clean install \
                 -Pgoogleapi \
                 -Denv="\${env.APIGEE_ENV}" -Dorg="\${env.APIGEE_ORG}" -Ddeployment.suffix="\${env.APIGEE_DEPLOYMENT_SUFFIX}" 
