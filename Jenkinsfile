@@ -138,8 +138,8 @@ pipeline {
           steps {
             sh '''
               #!/bin/bash
+              APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
               TOKEN_AUTH=$(gcloud auth print-access-token)
-              TOKEN_AUTH=ya29.a0ARrdaM8-sjVEYELFyWr79eaibTutR-5H6V5yPJ3psSKYuS12GdRd_9RISXEjYHHi7dH6iZq6tGAKRkworqgTl1LD6KM6RGgVPmXDX1Y5H-dLcxmXJbR6uJKKNZnkLDRp-M0WoEAxDB0tjouhJkm0wfNKh_NaLBoDaCdGtQ
               mvn clean install \
                 -Pgoogleapi \
                 -Denv="eval" -Dorg="toc-avaya-sandbox-apigee" -Dtoken=${TOKEN_AUTH} -Ddeployment.suffix="pipeline" 
