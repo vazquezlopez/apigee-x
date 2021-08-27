@@ -139,10 +139,9 @@ pipeline {
             sh '''
               #!/bin/bash
               APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
-              TOKEN_AUTH=$(gcloud auth print-access-token)
               mvn clean install \
                 -Pgoogleapi \
-                -Denv="eval" -Dorg="toc-avaya-sandbox-apigee" -Dtoken=${APIGEE_SA_TOKEN} -Ddeployment.suffix="pipeline" 
+                -Denv="eval" -Dorg="${env.APIGEE_ORG}" -Dtoken=${APIGEE_SA_TOKEN} -Ddeployment.suffix="pipeline" 
             '''
           }
         }
