@@ -136,7 +136,7 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh """
+            sh '''
               APIGEE_SA_TOKEN="\${APIGEE_TOKEN:-\$(gcloud auth application-default print-access-token)}"
               TOKEN_AUTH=$(gcloud auth print-access-token)
               mvn clean install \
@@ -146,7 +146,7 @@ pipeline {
                 -Dorg="${env.APIGEE_ORG}" \
                 -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" \
                 -Ddeployment.description="Jenkins Build: 1 Author: ${env.AUTHOR_EMAIL}"
-            """
+            '''
           }
         }
        
