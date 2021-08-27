@@ -142,10 +142,9 @@ pipeline {
               mvn clean install \
                 -Pgoogleapi \
                 -Denv="${env.APIGEE_ENV}" \
-                -Dtoken="\$TOKEN_AUTH" \
+                -Dtoken="${TOKEN_AUTH}" \
                 -Dorg="${env.APIGEE_ORG}" \
-                -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" \
-                -Ddeployment.description="Jenkins Build: 1 Author: ${env.AUTHOR_EMAIL}"
+                -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" 
             '''
           }
         }
