@@ -120,7 +120,7 @@ pipeline {
                 -Papigeeapi \
                 -Dpassword="${APIGEE_CREDS_PSW}" \
                 -Denv="${env.APIGEE_ENV}" \
-                -Dusername="${APIGchshchshEE_CREDS_USR}" \
+                -Dusername="${APIGEE_CREDS_USR}" \
                 -Dorg="${env.APIGEE_ORG}" \
                 -Ddeployment.suffix="${env.APIGEE_DEPLOYMENT_SUFFIX}" \
                 -Ddeployment.description="Jenkins Build: ${env.BUILD_TAG} Author: ${env.AUTHOR_EMAIL}"
