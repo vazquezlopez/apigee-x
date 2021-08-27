@@ -141,7 +141,7 @@ pipeline {
               TOKEN_AUTH=$(gcloud auth print-access-token)
               mvn clean install \
                 -Pgoogleapi \
-                -Denv="eval" -Dorg="toc-avaya-apigee.dclatam.net" -Dtoken="${TOKEN_AUTH}" -Ddeployment.suffix="pipeline" 
+                -Denv="eval" -Dorg="toc-avaya-sandbox-apigee" -Dtoken="${TOKEN_AUTH}" -Ddeployment.suffix="pipeline" 
             '''
           }
         }
