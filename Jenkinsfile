@@ -17,15 +17,12 @@ pipeline {
         AUTHOR_EMAIL = '@google.com'
     }
     
-     stages {
+    stages {
         stage("Env Variables") {
             steps {
                 sh "printenv"
             }
         }
-    }
-
-    stages {
         stage('Set Apigee Env and Proxy Suffix') {
           steps {	
             script{
