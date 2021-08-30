@@ -12,15 +12,22 @@ pipeline {
         API_VERSION = 'google'
         APIGEE_ORG = 'toc-avaya-sandbox-apigee'
         APIGEE_ENV = 'eval'
-        TEST_HOST= 'toc-avaya-apigee.dclatam.net'
+        TEST_HOST= 'api.latamdc.com'
         APIGEE_DEPLOYMENT_SUFFIX='jenkis'
         AUTHOR_EMAIL = '@google.com'
+    }
+    
+     stages {
+        stage("Env Variables") {
+            steps {
+                sh "printenv"
+            }
+        }
     }
 
     stages {
         stage('Set Apigee Env and Proxy Suffix') {
-          steps {
-            echo "hello"	
+          steps {	
             script{
               // Main branch for Apigee test environment
               if (env.GIT_BRANCH == "main") {
@@ -34,11 +41,12 @@ pipeline {
                   // env.APIGEE_ORG = 'apigee-org-name'
               // All other branches are deployed as separate proxies with suffix in the test environment
               } else {
-                  env.APIGEE_DEPLOYMENT_SUFFIX = env.GIT_BRANCH ? "-" + env.GIT_BRANCH.replaceAll("\\W", "-") : "-devrel-jenkins"
+                  env.APIGEE_DEPLOYMENT_SUFFIX = env.GIT_BRANCH ? "-" + env.GIT_BRANCH.replaceAll("\\W", "-") : "-jenkins"
                   env.APIGEE_ENV = env.APIGEE_TEST_ENV
                   // env.APIGEE_ORG = 'apigee-org-name'
               }
               println "---------- Branch-Dependent Build Config ----------"
+              println "Apigee Git: " + env.GIT_BRANCH
               println "Apigee Org: " + env.APIGEE_ORG
               println "Apigee Env: " + env.APIGEE_ENV
               println "Proxy Deployment Suffix: " + env.APIGEE_DEPLOYMENT_SUFFIX
