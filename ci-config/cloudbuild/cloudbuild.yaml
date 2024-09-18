@@ -55,7 +55,7 @@ steps:
         # Config based on branch name
         if [ "$BRANCH_NAME" = "main" ]
         then
-          echo "export APIGEE_ENV=$APIGEE_ENV" >> env.txt
+          echo "export APIGEE_ENV=apigee-tf-env" >> env.txt
           echo "export APIGEE_DEPLOYMENT_SUFFIX=''" >> env.txt
         elif [ "$BRANCH_NAME" = "prod" ]
         then
@@ -143,7 +143,7 @@ substitutions:
   # Apigee Org for where to deploy to
   _DEPLOYMENT_ORG: $APIGEE_ORG
   # (Optional) Apigee Environment overrides
-  _APIGEE_TEST_ENV: apigee-env-tf
+  _APIGEE_TEST_ENV: apigee-tf-env
   _APIGEE_PROD_ENV: prod-env
   # Management API version use:
   # 'apigee' for current Apigee Edge
