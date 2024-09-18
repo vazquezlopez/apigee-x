@@ -19,8 +19,6 @@ export TOKEN=\"$(gcloud auth application-default print-access-token)\"
 echo "Token was generated"
 echo $TOKEN
 
-
-source env.txt && \
 mvn clean install -ntp \
           -P"googleapi" \
           -Denv="$APIGEE_ENV" \
