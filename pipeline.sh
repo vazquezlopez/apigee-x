@@ -25,8 +25,7 @@ SUBSTITUTIONS_X="$SUBSTITUTIONS_X,_APIGEE_ENV=$APIGEE_ENV"
 SUBSTITUTIONS_X="$SUBSTITUTIONS_X,_API_VERSION=google"
 SUBSTITUTIONS_X="$SUBSTITUTIONS_X,_WORK_DIR=."
 SUBSTITUTIONS_X="$SUBSTITUTIONS_X,BRANCH_NAME=$BRANCH_NAME_X"
-gcloud builds submit --config="$SCRIPTPATH/ci-config/cloudbuild/cloudbuild.yaml" \
-  --substitutions="$SUBSTITUTIONS_X"
+gcloud builds submit --config="$SCRIPTPATH/ci-config/cloudbuild/cloudbuild.yaml" 
 
 echo "[INFO] CICD Pipeline for Apigee Edge (Cloud Build)"
 
