@@ -1,3 +1,6 @@
+set -e
+SCRIPTPATH=$( (cd "$(dirname "$0")" && pwd ))
+
 echo "[INFO] CICD Pipeline for Apigee X - TeamCity"
 BRANCH_NAME_X=main
 
@@ -10,6 +13,7 @@ SUBSTITUTIONS_X="$SUBSTITUTIONS_X,BRANCH_NAME=$BRANCH_NAME_X"
 echo $SUBSTITUTIONS_X
 
 echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
+cat env.txt
 echo "[BUILD CONFIG] - Token generado"
 echo "$APIGEE_BUILD_TOKEN"
 
