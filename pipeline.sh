@@ -23,7 +23,7 @@ mvn clean install -ntp \
           -P"googleapi" \
           -Denv="$APIGEE_ENV" \
           -Dtoken="$TOKEN" \
-          -Dorg="$_DEPLOYMENT_ORG" \
+          -Dorg="$APIGEE_ORG" \
           -Ddeployment.suffix="-TeamCity" \
           -Ddeployment.description="CloudRun Build: $BUILD_ID"
 
