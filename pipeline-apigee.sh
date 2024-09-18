@@ -9,5 +9,9 @@ SUBSTITUTIONS_X="$SUBSTITUTIONS_X,BRANCH_NAME=$BRANCH_NAME_X"
 
 echo $SUBSTITUTIONS_X
 
+echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
+echo "[BUILD CONFIG] - Token generado"
+echo "$APIGEE_BUILD_TOKEN"
+
 gcloud builds submit --config="$SCRIPTPATH/ci-config/cloudbuild/cloudbuild.yaml" \
   --substitutions="$SUBSTITUTIONS_X"
