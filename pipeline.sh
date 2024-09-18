@@ -15,14 +15,16 @@ echo $SUBSTITUTIONS_X
 echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
 cat env.txt
 echo "[BUILD CONFIG] - Token generado"
-echo "$APIGEE_BUILD_TOKEN"
-sed "s/APIGEE_BUILD_TOKEN=.*/APIGEE_BUILD_TOKEN=[hidden]/g"
+export TOKEN=\"$(gcloud auth application-default print-access-token)\"
+echo "Token was generated"
+echo $TOKEN
+
 
 source env.txt && \
 mvn clean install -ntp \
           -P"googleapi" \
           -Denv="$APIGEE_ENV" \
-          -Dtoken="$${APIGEE_BUILD_TOKEN}" \
+          -Dtoken="$TOKEN" \
           -Dorg="$_DEPLOYMENT_ORG" \
           -Ddeployment.suffix="-TeamCity" \
           -Ddeployment.description="CloudRun Build: $BUILD_ID"
