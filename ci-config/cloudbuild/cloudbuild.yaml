@@ -81,6 +81,7 @@ steps:
 
         echo "[BUILD CONFIG]"
         echo
+        cat env.txt
         cat env.txt | sed "s/APIGEE_BUILD_PASS=.*/APIGEE_BUILD_PASS=[hidden]/g" | \
         sed "s/APIGEE_BUILD_TOKEN=.*/APIGEE_BUILD_TOKEN=[hidden]/g"
 
@@ -107,7 +108,7 @@ steps:
           source env.txt && \
           mvn clean install -ntp \
             -P"googleapi" \
-            -Denv="$APIGEE_ENV" \
+            -Denv="$${APIGEE_ENV}" \
             -Dtoken="$${APIGEE_BUILD_TOKEN}" \
             -Dorg="$APIGEE_ORG" \
             -Ddeployment.suffix="$${APIGEE_DEPLOYMENT_SUFFIX}" \
@@ -140,14 +141,14 @@ steps:
         gs://${PROJECT_ID}_cloudbuild/reports/$BUILD_ID
 substitutions:
   # Apigee Org for where to deploy to
-  _DEPLOYMENT_ORG: my-org
+  _DEPLOYMENT_ORG: $APIGEE_ORG
   # (Optional) Apigee Environment overrides
-  _APIGEE_TEST_ENV: test
-  _APIGEE_PROD_ENV: prod
+  _APIGEE_TEST_ENV: apigee-env-tf
+  _APIGEE_PROD_ENV: prod-env
   # Management API version use:
   # 'apigee' for current Apigee Edge
   # 'google' for Apigee X and hybrid
-  _API_VERSION: apigee #apigee|google
+  _API_VERSION: google #apigee|google
   # Host name for the integration test
-  _INT_TEST_HOST: org-env.apigee.net
+  _INT_TEST_HOST: 34.49.101.75.nip.io
   _WORK_DIR: "references/cicd-pipeline"
