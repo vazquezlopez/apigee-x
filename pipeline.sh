@@ -16,13 +16,5 @@ export TOKEN=$(gcloud auth print-access-token)
 echo "Token was generated"
 echo $TOKEN
 
-mvn clean install -ntp \
-          -P"googleapi" \
-          -Denv="$APIGEE_ENV" \
-          -Dtoken="$TOKEN" \
-          -Dorg="$APIGEE_ORG" \
-          -Ddeployment.suffix="-TeamCity" \
-          -Ddeployment.description="CloudRun Build: $BUILD_ID"
-
 gcloud builds submit --config="$SCRIPTPATH/ci-config/cloudbuild/cloudbuild.yaml" \
   --substitutions="$SUBSTITUTIONS_X"
