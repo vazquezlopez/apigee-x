@@ -75,8 +75,10 @@ steps:
         echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
       fi
 
-      echo "[BUILD CONFIG]"
-      echo
+      echo "[BUILD CONFIG] - Token generado"
+      echo "$APIGEE_BUILD_TOKEN"
+      echo ""$${APIGEE_BUILD_TOKEN}""
+      
       cat env.txt | sed "s/APIGEE_BUILD_PASS=.*/APIGEE_BUILD_PASS=[hidden]/g" | \
       sed "s/APIGEE_BUILD_TOKEN=.*/APIGEE_BUILD_TOKEN=[hidden]/g"
 
