@@ -145,6 +145,8 @@ substitutions:
   # (Optional) Apigee Environment overrides
   _APIGEE_TEST_ENV: apigee-tf-env
   _APIGEE_PROD_ENV: prod-env
+  APIGEE_ENV: apigee-tf-env
+  APIGEE_ORG: nonprod-apigee-svc-3qph
   # Management API version use:
   # 'apigee' for current Apigee Edge
   # 'google' for Apigee X and hybrid
