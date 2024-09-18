@@ -105,13 +105,15 @@ steps:
             -Ddeployment.suffix="$${APIGEE_DEPLOYMENT_SUFFIX}" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         else
-          source env.txt && \
+          export TOKEN=$(gcloud auth print-access-token)
+          echo "Token was generated"
+          echo $TOKEN
           mvn clean install -ntp \
             -P"googleapi" \
             -Denv="apigee-tf-env" \
-            -Dtoken="$${APIGEE_BUILD_TOKEN}" \
+            -Dtoken="$TOKEN" \
             -Dorg="$APIGEE_ORG" \
-            -Ddeployment.suffix="$${APIGEE_DEPLOYMENT_SUFFIX}" \
+            -Ddeployment.suffix="-TeamCity-" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         fi
     # Run integration tests
