@@ -108,18 +108,5 @@ steps:
         gsutil cp ./report.*.html \
         gs://${PROJECT_ID}_cloudbuild/reports/$BUILD_ID
 substitutions:
-  # Apigee Org for where to deploy to
-  #_DEPLOYMENT_ORG: $APIGEE_ORG
-  
-  # (Optional) Apigee Environment overrides
-  #_APIGEE_TEST_ENV: apigee-tf-env
-  #_APIGEE_PROD_ENV: prod-env
-  #_APIGEE_ENV: apigee-tf-env
-  #_APIGEE_ORG: nonprod-apigee-svc-3qph
-  # Management API version use:
-  # 'apigee' for current Apigee Edge
-  # 'google' for Apigee X and hybrid
-  #_API_VERSION: google #apigee|google
-  # Host name for the integration test
-  #_INT_TEST_HOST: 34.49.101.75.nip.io
+
   _WORK_DIR: "references/cicd-pipeline"
