@@ -68,15 +68,15 @@ steps:
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         else
          # export TOKEN=$(gcloud auth print-access-token)
-          echo "Token was generated"
-          echo "$${_TOKEN}"
+         # echo "Token was generated"
+         # echo "$${_TOKEN}"
           echo "Token was generated previously"
           echo "$_TOKEN"
           mvn clean install -ntp \
             -P"googleapi" \
-            -Denv="$${APIGEE_ENV}" \
+            -Denv="$_APIGEE_ENV" \
             -Dtoken="$_TOKEN" \
-            -Dorg="$${APIGEE_ORG}" \
+            -Dorg="$_APIGEE_ORG" \
             -Ddeployment.suffix="-TeamCity-" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         fi
