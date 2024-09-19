@@ -45,45 +45,7 @@ steps:
         npm run unit-test
     # Fetch Apigee credentials
     # and set branch specific config parameters
-  - name: gcr.io/cloud-builders/gcloud
-    id: "Fetch Credentials"
-    entrypoint: "bash"
-    args:
-      - "-c"
-      - |-
-        cd "$_WORK_DIR"
-        # Config based on branch name
-        if [ "$BRANCH_NAME" = "main" ]
-        then
-          echo "export APIGEE_ENV=$_APIGEE_TEST_ENV" >> env.txt
-          echo "export APIGEE_DEPLOYMENT_SUFFIX=''" >> env.txt
-        elif [ "$BRANCH_NAME" = "prod" ]
-        then
-          echo "export APIGEE_ENV=$_APIGEE_PROD_ENV" >> env.txt
-          echo "export APIGEE_DEPLOYMENT_SUFFIX=''" >> env.txt
-        else
-          echo "export APIGEE_ENV=$_APIGEE_TEST_ENV" >> env.txt
-          echo "export APIGEE_DEPLOYMENT_SUFFIX=\"-$(echo $BRANCH_NAME | \
-          sed "s/[^A-Za-z0-9]/-/g")\"" >> env.txt
-        fi
 
-        if [ "$_API_VERSION" = "apigee" ]
-        then
-          echo "export APIGEE_BUILD_PASS=\"$(gcloud secrets versions access latest \
-            --secret=devrel_apigee_pass --format="get(payload.data)" | \
-            base64 -d)\"" >> env.txt &&
-          echo "export APIGEE_BUILD_USER=\"$(gcloud secrets versions access latest \
-            --secret=devrel_apigee_user --format="get(payload.data)" | \
-            base64 -d)\"" >> env.txt
-        else
-          echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
-        fi
-
-        echo "[BUILD CONFIG]"
-        echo
-        cat env.txt
-        cat env.txt | sed "s/APIGEE_BUILD_PASS=.*/APIGEE_BUILD_PASS=[hidden]/g" | \
-        sed "s/APIGEE_BUILD_TOKEN=.*/APIGEE_BUILD_TOKEN=[hidden]/g"
 
     # Deploy using the Apigee credentials from above
   - name: "gcr.io/cloud-builders/mvn"
@@ -110,9 +72,9 @@ steps:
           echo $TOKEN
           mvn clean install -ntp \
             -P"googleapi" \
-            -Denv="$_APIGEE_TEST_ENV" \
+            -Denv="$APIGEE_ENV" \
             -Dtoken="$TOKEN" \
-            -Dorg="$_DEPLOYMENT_ORG" \
+            -Dorg="$APIGEE_ORG" \
             -Ddeployment.suffix="-TeamCity-" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         fi
