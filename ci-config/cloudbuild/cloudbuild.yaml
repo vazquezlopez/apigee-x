@@ -70,21 +70,12 @@ steps:
           sed "s/[^A-Za-z0-9]/-/g")\"" >> env.txt
         fi
 
-        if [ "$_API_VERSION" = "apigee" ]
-        then
-          echo "export APIGEE_BUILD_PASS=\"$(gcloud secrets versions access latest \
-            --secret=devrel_apigee_pass --format="get(payload.data)" | \
-            base64 -d)\"" >> env.txt &&
-          echo "export APIGEE_BUILD_USER=\"$(gcloud secrets versions access latest \
-            --secret=devrel_apigee_user --format="get(payload.data)" | \
-            base64 -d)\"" >> env.txt
-        else
-          echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
-        fi
+        
+        echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
 
         echo "[BUILD CONFIG]"
-        echo
-        cat env.txt
+        
+        #cat env.txt
         cat env.txt | sed "s/APIGEE_BUILD_PASS=.*/APIGEE_BUILD_PASS=[hidden]/g" | \
         sed "s/APIGEE_BUILD_TOKEN=.*/APIGEE_BUILD_TOKEN=[hidden]/g"
   - name: "gcr.io/cloud-builders/mvn"
@@ -95,8 +86,6 @@ steps:
       - |-
         cd "$_WORK_DIR"
         
-        echo "Token was generated previously"
-        echo "$_TOKEN"
         mvn clean install -ntp \
             -P"googleapi" \
             -Denv="$_APIGEE_ENV" \
