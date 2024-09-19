@@ -132,7 +132,7 @@ steps:
         gs://${PROJECT_ID}_cloudbuild/reports/$BUILD_ID
 substitutions:
   # Apigee Org for where to deploy to
-  _DEPLOYMENT_ORG: $APIGEE_ORG
+  #_DEPLOYMENT_ORG: $APIGEE_ORG
   
   # (Optional) Apigee Environment overrides
   #_APIGEE_TEST_ENV: apigee-tf-env
