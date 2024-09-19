@@ -132,5 +132,5 @@ substitutions:
   # 'google' for Apigee X and hybrid
   _API_VERSION: google #apigee|google
   # Host name for the integration test
-  _INT_TEST_HOST: 34.49.101.75.nip.io
+  #_INT_TEST_HOST: 34.49.101.75.nip.io
   _WORK_DIR: "references/cicd-pipeline"
