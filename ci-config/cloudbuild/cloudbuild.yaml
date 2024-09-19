@@ -62,7 +62,7 @@ steps:
           echo "export APIGEE_DEPLOYMENT_SUFFIX=''" >> env.txt
         elif [ "$BRANCH_NAME" = "prod" ]
         then
-          echo "export APIGEE_ENV=$_APIGEE_PROD_ENV" >> env.txt
+          echo "export APIGEE_ENV=$_APIGEE_ENV" >> env.txt
           echo "export APIGEE_DEPLOYMENT_SUFFIX=''" >> env.txt
         else
           echo "export APIGEE_ENV=$_APIGEE_ENV" >> env.txt
