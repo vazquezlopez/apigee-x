@@ -67,9 +67,6 @@ steps:
             -Ddeployment.suffix="$${APIGEE_DEPLOYMENT_SUFFIX}" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         else
-         # export TOKEN=$(gcloud auth print-access-token)
-         # echo "Token was generated"
-         # echo "$${_TOKEN}"
           echo "Token was generated previously"
           echo "$_TOKEN"
           mvn clean install -ntp \
@@ -77,7 +74,7 @@ steps:
             -Denv="$_APIGEE_ENV" \
             -Dtoken="$_TOKEN" \
             -Dorg="$_APIGEE_ORG" \
-            -Ddeployment.suffix="-TeamCity-" \
+            -Ddeployment.suffix="-TeamCity-CB" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         fi
     # Run integration tests
@@ -88,7 +85,7 @@ steps:
       - "-c"
       - |-
         cd "$_WORK_DIR"
-        source env.txt && \
+        #source env.txt && \
         npm run integration-test | tee report.e2e.html && \
         if [ ${PIPESTATUS[0]} -ne "0" ]; then exit -1; fi
     env:
