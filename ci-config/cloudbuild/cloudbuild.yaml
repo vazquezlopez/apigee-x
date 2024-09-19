@@ -110,9 +110,9 @@ steps:
           echo $TOKEN
           mvn clean install -ntp \
             -P"googleapi" \
-            -Denv="apigee-tf-env" \
+            -Denv="$_APIGEE_TEST_ENV" \
             -Dtoken="$TOKEN" \
-            -Dorg="$APIGEE_ORG" \
+            -Dorg="$_DEPLOYMENT_ORG" \
             -Ddeployment.suffix="-TeamCity-" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         fi
