@@ -107,10 +107,10 @@ substitutions:
   # Apigee Org for where to deploy to
   _DEPLOYMENT_ORG: $APIGEE_ORG
   # (Optional) Apigee Environment overrides
-  _APIGEE_TEST_ENV: apigee-tf-env
-  _APIGEE_PROD_ENV: prod-env
-  _APIGEE_ENV: apigee-tf-env
-  _APIGEE_ORG: nonprod-apigee-svc-3qph
+  #_APIGEE_TEST_ENV: apigee-tf-env
+  #_APIGEE_PROD_ENV: prod-env
+  #_APIGEE_ENV: apigee-tf-env
+  #_APIGEE_ORG: nonprod-apigee-svc-3qph
   # Management API version use:
   # 'apigee' for current Apigee Edge
   # 'google' for Apigee X and hybrid
