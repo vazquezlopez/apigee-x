@@ -29,7 +29,7 @@ SUBSTITUTIONS_X="$SUBSTITUTIONS_X,_WORK_DIR=."
 export AUTH_TOKEN=$(gcloud auth print-access-token)
 echo "Token was generated"
 
-SUBSTITUTIONS_X="$SUBSTITUTIONS_X,TOKEN=$AUTH_TOKEN"
+#SUBSTITUTIONS_X="$SUBSTITUTIONS_X,TOKEN=$AUTH_TOKEN"
 
 echo $SUBSTITUTIONS_X
 gcloud builds submit --config="$SCRIPTPATH/ci-config/cloudbuild/cloudbuild.yaml" --substitutions="$SUBSTITUTIONS_X"
