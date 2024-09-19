@@ -26,6 +26,11 @@ SUBSTITUTIONS_X="$SUBSTITUTIONS_X,_API_VERSION=google"
 SUBSTITUTIONS_X="$SUBSTITUTIONS_X,_WORK_DIR=."
 SUBSTITUTIONS_X="$SUBSTITUTIONS_X,BRANCH_NAME=$BRANCH_NAME_X"
 
+export AUTH_TOKEN=$(gcloud auth print-access-token)
+echo "Token was generated"
+
+SUBSTITUTIONS_X="$SUBSTITUTIONS_X,TOKEN=$AUTH_TOKEN"
+
 echo $SUBSTITUTIONS_X
 gcloud builds submit --config="$SCRIPTPATH/ci-config/cloudbuild/cloudbuild.yaml" --substitutions="$SUBSTITUTIONS_X"
 
