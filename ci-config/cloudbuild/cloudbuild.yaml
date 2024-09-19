@@ -69,7 +69,7 @@ steps:
         else
           export TOKEN=$(gcloud auth print-access-token)
           echo "Token was generated"
-          echo $TOKEN
+          echo "$${TOKEN}"
           mvn clean install -ntp \
             -P"googleapi" \
             -Denv="$${APIGEE_ENV}" \
