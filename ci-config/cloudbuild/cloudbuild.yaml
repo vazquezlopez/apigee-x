@@ -48,6 +48,45 @@ steps:
 
 
     # Deploy using the Apigee credentials from above
+  - name: gcr.io/cloud-builders/gcloud
+    id: "Fetch Credentials"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |-
+        cd "$_WORK_DIR"
+        # Config based on branch name
+        if [ "$BRANCH_NAME" = "main" ]
+        then
+          echo "export APIGEE_ENV=$_APIGEE_ENV" >> env.txt
+          echo "export APIGEE_DEPLOYMENT_SUFFIX=''" >> env.txt
+        elif [ "$BRANCH_NAME" = "prod" ]
+        then
+          echo "export APIGEE_ENV=$_APIGEE_PROD_ENV" >> env.txt
+          echo "export APIGEE_DEPLOYMENT_SUFFIX=''" >> env.txt
+        else
+          echo "export APIGEE_ENV=$_APIGEE_ENV" >> env.txt
+          echo "export APIGEE_DEPLOYMENT_SUFFIX=\"-$(echo $BRANCH_NAME | \
+          sed "s/[^A-Za-z0-9]/-/g")\"" >> env.txt
+        fi
+
+        if [ "$_API_VERSION" = "apigee" ]
+        then
+          echo "export APIGEE_BUILD_PASS=\"$(gcloud secrets versions access latest \
+            --secret=devrel_apigee_pass --format="get(payload.data)" | \
+            base64 -d)\"" >> env.txt &&
+          echo "export APIGEE_BUILD_USER=\"$(gcloud secrets versions access latest \
+            --secret=devrel_apigee_user --format="get(payload.data)" | \
+            base64 -d)\"" >> env.txt
+        else
+          echo "export APIGEE_BUILD_TOKEN=\"$(gcloud auth application-default print-access-token)\"" >> env.txt
+        fi
+
+        echo "[BUILD CONFIG]"
+        echo
+        cat env.txt
+        cat env.txt | sed "s/APIGEE_BUILD_PASS=.*/APIGEE_BUILD_PASS=[hidden]/g" | \
+        sed "s/APIGEE_BUILD_TOKEN=.*/APIGEE_BUILD_TOKEN=[hidden]/g"
   - name: "gcr.io/cloud-builders/mvn"
     id: "Proxy Deployment"
     entrypoint: "bash"
@@ -55,28 +94,17 @@ steps:
       - "-c"
       - |-
         cd "$_WORK_DIR"
-        if [ "$_API_VERSION" = "apigee" ]
-        then
-          source env.txt && \
-          mvn clean install -ntp \
-            -P"apigeeapi" \
-            -Denv="$${APIGEE_ENV}" \
-            -Dpassword="$${APIGEE_BUILD_PASS}" \
-            -Dusername="$${APIGEE_BUILD_USER}" \
-            -Dorg="$_DEPLOYMENT_ORG" \
-            -Ddeployment.suffix="$${APIGEE_DEPLOYMENT_SUFFIX}" \
-            -Ddeployment.description="CloudRun Build: $BUILD_ID"
-        else
-          echo "Token was generated previously"
-          echo "$_TOKEN"
-          mvn clean install -ntp \
+        
+        echo "Token was generated previously"
+        echo "$_TOKEN"
+        mvn clean install -ntp \
             -P"googleapi" \
             -Denv="$_APIGEE_ENV" \
             -Dtoken="$_TOKEN" \
             -Dorg="$_APIGEE_ORG" \
             -Ddeployment.suffix="-TeamCity-CB" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
-        fi
+        
     # Run integration tests
   - name: node
     id: "Integration Test"
@@ -85,7 +113,7 @@ steps:
       - "-c"
       - |-
         cd "$_WORK_DIR"
-        #source env.txt && \
+        source env.txt && \
         npm run integration-test | tee report.e2e.html && \
         if [ ${PIPESTATUS[0]} -ne "0" ]; then exit -1; fi
     env:
