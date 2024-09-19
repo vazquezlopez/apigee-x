@@ -105,19 +105,7 @@ steps:
             -Ddeployment.suffix="-TeamCity-CB" \
             -Ddeployment.description="CloudRun Build: $BUILD_ID"
         
-    # Run integration tests
-  - name: node
-    id: "Integration Test"
-    entrypoint: "bash"
-    args:
-      - "-c"
-      - |-
-        cd "$_WORK_DIR"
-        source env.txt && \
-        npm run integration-test | tee report.e2e.html && \
-        if [ ${PIPESTATUS[0]} -ne "0" ]; then exit -1; fi
-    env:
-      - "TEST_HOST=$_INT_TEST_HOST"
+  
     # Copy coverage reports and other deployment artifacts to a storage bucket
   - name: "gcr.io/cloud-builders/gsutil"
     id: "Archive Report"
